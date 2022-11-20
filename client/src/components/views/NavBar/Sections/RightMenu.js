@@ -3,16 +3,17 @@ import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import { useNavigate   } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 function RightMenu(props) {
+  const navigate = useNavigate();
   const user = useSelector(state => state.user)
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
-        props.history.push("/login");
+        navigate("/login");
       } else {
         alert('Log Out Failed')
       }
@@ -41,5 +42,5 @@ function RightMenu(props) {
   }
 }
 
-export default withRouter(RightMenu);
+export default RightMenu;
 
